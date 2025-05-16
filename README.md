@@ -1,6 +1,8 @@
 # zod4-errors-issue-20250616
 
-Repro for a Zod v4 issue (specifically `zod@^3.25.0-beta.20250516T044623`) where the `error` object returned by `safeParse` is not an instance of `z.ZodError`.
+Repro for a Zod v4 issue (specifically `zod@^3.25.0-beta.20250516T044623`) where the `error` object returned by `safeParse` is not an instance of `z.ZodError`. However, `parse()` does throw an error that matches `z.ZodError`.
+
+I'm not sure if this change was intentional or not.
 
 ## How to Reproduce
 

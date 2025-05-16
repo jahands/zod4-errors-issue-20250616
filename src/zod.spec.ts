@@ -25,4 +25,19 @@ describe('zod v4', () => {
 			expect(res.error instanceof z.ZodError).toBe(false)
 		})
 	})
+
+	describe('parse()', () => {
+		it('throws error that is instance of z.ZodError', () => {
+			expect(() => z.string().parse(5)).toThrowError(z.ZodError)
+
+			let didThrow = false
+			try {
+				z.string().parse(5)
+			} catch (e) {
+				didThrow = true
+				expect(e).toBeInstanceOf(z.ZodError)
+			}
+			expect(didThrow).toBe(true)
+		})
+	})
 })
