@@ -39,5 +39,16 @@ describe('zod v4', () => {
 			}
 			expect(didThrow).toBe(true)
 		})
+
+		it('throws error that is an instance of Error', () => {
+			let didThrow = false
+			try {
+				z.string().parse(5)
+			} catch (e) {
+				didThrow = true
+				expect(e).toBeInstanceOf(Error)
+			}
+			expect(didThrow).toBe(true)
+		})
 	})
 })
