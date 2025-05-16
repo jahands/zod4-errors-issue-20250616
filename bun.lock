@@ -4,7 +4,7 @@
     "": {
       "name": "zod4-errors-issue-20250616",
       "dependencies": {
-        "zod": "^3.25.0-beta.20250516T044623",
+        "zod": "3.25.0-beta.20250516T205236",
       },
       "devDependencies": {
         "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
@@ -265,6 +265,6 @@
 
     "why-is-node-running": ["why-is-node-running@2.3.0", "", { "dependencies": { "siginfo": "^2.0.0", "stackback": "0.0.2" }, "bin": { "why-is-node-running": "cli.js" } }, "sha512-hUrmaWBdVDcxvYqnyh09zunKzROWjbZTiNy8dBEjkS7ehEDQibXJ7XvlmtbwuTclUiIyN+CyXQD4Vmko8fNm8w=="],
 
-    "zod": ["zod@3.25.0-beta.20250516T044623", "", {}, "sha512-NjcetsH2m7GAPQV0hbYAXefUm8mqJf3W7dPBk41EHQrUcwmh5MCvOrIXXkl62CIKAFQyIgd4mukDEQVzBop9qw=="],
+    "zod": ["zod@3.25.0-beta.20250516T205236", "", {}, "sha512-RzuSaG55IaHJ32/FYgjlMpWDQM9mXTVt4CvoCJgNw5Wvu0FwYDcq4yHEiIp/lRxOXSjVWmv19k/94Dieu1ZmcA=="],
   }
 }

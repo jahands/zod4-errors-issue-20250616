@@ -1,10 +1,11 @@
 import { assert, describe, expect, it, test } from 'vitest'
-import { z } from 'zod/v4'
+import { z as z3 } from 'zod'
+import { z as z4 } from 'zod/v4'
 
 describe('zod v4', () => {
 	describe('safeParse()', () => {
 		it('returns error that is not an instance of z.ZodError', () => {
-			const res = z.string().safeParse(5)
+			const res = z4.string().safeParse(5)
 			expect(res.data).toBeUndefined()
 			expect(res.error).not.toBeUndefined()
 			expect(res.error).toMatchInlineSnapshot(`
@@ -20,22 +21,22 @@ describe('zod v4', () => {
 				}
 			`)
 
-			// WHY???
-			expect(res.error).not.toBeInstanceOf(z.ZodError)
-			expect(res.error instanceof z.ZodError).toBe(false)
+			// FIXED!!
+			expect(res.error).toBeInstanceOf(z4.ZodError)
+			expect(res.error instanceof z4.ZodError).toBe(true)
 		})
 	})
 
 	describe('parse()', () => {
 		it('throws error that is instance of z.ZodError', () => {
-			expect(() => z.string().parse(5)).toThrowError(z.ZodError)
+			expect(() => z4.string().parse(5)).toThrowError(z4.ZodError)
 
 			let didThrow = false
 			try {
-				z.string().parse(5)
+				z4.string().parse(5)
 			} catch (e) {
 				didThrow = true
-				expect(e).toBeInstanceOf(z.ZodError)
+				expect(e).toBeInstanceOf(z4.ZodError)
 			}
 			expect(didThrow).toBe(true)
 		})
@@ -43,12 +44,48 @@ describe('zod v4', () => {
 		it('throws error that is an instance of Error', () => {
 			let didThrow = false
 			try {
-				z.string().parse(5)
+				z4.string().parse(5)
 			} catch (e) {
 				didThrow = true
 				expect(e).toBeInstanceOf(Error)
 			}
 			expect(didThrow).toBe(true)
 		})
+	})
+})
+
+describe('zod v3 vs v4 stringifying with vitest toMatchInlineSnapshot()', () => {
+	test('zod v3', () => {
+		let didThrow = false
+		try {
+			z3.string().parse(5)
+		} catch (e) {
+			didThrow = true
+			expect(e).toMatchInlineSnapshot(`
+				[ZodError: [
+				  {
+				    "code": "invalid_type",
+				    "expected": "string",
+				    "received": "number",
+				    "path": [],
+				    "message": "Expected string, received number"
+				  }
+				]]
+			`)
+			console.error(e) // outputs full error as expected
+		}
+		expect(didThrow).toBe(true)
+	})
+
+	test('zod v4', () => {
+		let didThrow = false
+		try {
+			z4.string().parse(5)
+		} catch (e) {
+			didThrow = true
+			expect(e).toMatchInlineSnapshot(`[Error]`)
+			console.error(e) // outputs full error as expected
+		}
+		expect(didThrow).toBe(true)
 	})
 })
